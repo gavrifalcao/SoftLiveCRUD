@@ -14,7 +14,7 @@ interface EditProductModalProps {
 
 export default function EditProductModal({ open, onClose, product, onProductUpdated }: EditProductModalProps) {
   const [nome, setNome] = useState(product.nome);
-  const [descricao, setDescricao] = useState(product.descricao);
+  const [descricao, setDescricao] = useState(product.descricao ?? '');
   const [preco, setPreco] = useState(product.preco.toFixed(2).replace('.', ','));
   const [categoria, setCategoria] = useState(product.categoria);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
