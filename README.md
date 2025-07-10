@@ -1,69 +1,100 @@
-# React + TypeScript + Vite
+# CRUD SoftLive
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação web desenvolvida como parte de um teste técnico para vaga de Front-End. O objetivo foi construir uma interface de CRUD (Criar, Listar, Editar, Deletar) de produtos utilizando as tecnologias React 19, Vite e TypeScript, com boas práticas de organização, validação de formulários e deploy em produção.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧩 Funcionalidades
 
-## Expanding the ESLint configuration
+- Listagem de produtos com nome, categoria, descrição e preço
+- Modal para **adição de produto**, com validação de campos e autocomplete de categorias
+- Modal para **edição de produto**, com preenchimento automático dos dados existentes
+- Modal de **confirmação de exclusão**
+- Produtos salvos em uma API mock (MockAPI.io)
+- Interface responsiva e clara, com uso de Tailwind CSS e Headless UI
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🔗 Link para acesso
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+➡️ Acesse o projeto publicado:  
+**[https://soft-live-crud.vercel.app](https://soft-live-crud.vercel.app)**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 📷 Captura de tela
+
+![Screenshot da aplicação](./src/assets/img/crud-home.png)
+
+---
+
+## 🚀 Como rodar localmente
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/seu-usuario/crud-softlive.git
+cd crud-softlive
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Instale as dependências
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. Rode a aplicação em modo desenvolvimento
+
+```bash
+npm run dev
+```
+
+Acesse no navegador: [http://localhost:5173](http://localhost:5173)
+
+---
+
+## ⚙️ Scripts disponíveis
+
+| Script         | Descrição                                      |
+|----------------|------------------------------------------------|
+| `npm run dev`  | Inicia o servidor de desenvolvimento Vite      |
+| `npm run build`| Faz o build de produção com TypeScript + Vite  |
+| `npm run preview`| Visualiza o projeto após build (`dist/`)    |
+| `npm run lint` | Executa o ESLint para análise de código        |
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+- React 19
+- Vite
+- TypeScript
+- Tailwind CSS
+- Headless UI
+- HeroIcons
+- Axios
+- MockAPI.io
+
+---
+
+## 📁 Estrutura geral do projeto
+
+```
+src/
+├── assets/
+│   └── img/           → Imagens dos produtos
+├── components/        → Modais, cards e UI reutilizável
+├── hooks/             → Hooks customizados (futuro)
+├── pages/             → Páginas principais (futuro)
+├── services/          → Comunicação com a API
+├── types/             → Tipagens TypeScript (ex: Produto)
+├── utils/             → Categorias e funções auxiliares
+```
+
+---
+
+## 📃 Licença
+
+Este projeto foi desenvolvido unicamente para fins de avaliação técnica e aprendizado. Nenhum uso comercial é autorizado sem consentimento prévio.
+
+---
