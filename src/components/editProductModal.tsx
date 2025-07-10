@@ -3,6 +3,7 @@ import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/re
 import type { Product } from '../types/Product';
 import { updateProduct } from '../services/productService';
 import { CATEGORIES } from '../utils/categories';
+import { handlePrecoChange, precoToNumber } from '../services/precoService';
 
 interface EditProductModalProps {
   open: boolean;
@@ -33,16 +34,6 @@ export default function EditProductModal({ open, onClose, product, onProductUpda
       );
     }
   }, [categoria]);
-
-  const handlePrecoChange = (value: string) => {
-    let v = value.replace(/[^0-9,]/g, '');
-    const parts = v.split(',');
-    if (parts.length > 2) v = parts[0] + ',' + parts[1];
-    if (parts[1]?.length > 2) v = parts[0] + ',' + parts[1].slice(0, 2);
-    setPreco(v);
-  };
-
-  const precoToNumber = (str: string) => parseFloat(str.replace(',', '.') || '0');
 
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
@@ -104,7 +95,11 @@ export default function EditProductModal({ open, onClose, product, onProductUpda
 
                 {/* Preço */}
                 <div>
-                  <input type="text" placeholder="Preço * (ex: 12,34)" value={preco} onChange={(e) => handlePrecoChange(e.target.value)}
+                  <input
+                    type="text"
+                    placeholder="Preço * (ex: 12,34)"
+                    value={preco}
+                    onChange={(e) => handlePrecoChange(e.target.value, setPreco)}
                     className={`w-full border rounded px-3 py-2 ${errors.preco ? 'border-red-500' : 'border-gray-300'}`} />
                   {errors.preco && <p className="text-sm text-red-600 mt-1">{errors.preco}</p>}
                 </div>

@@ -3,6 +3,7 @@ import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/re
 import { createProduct } from '../services/productService';
 import type { Product } from '../types/Product';
 import { CATEGORIES } from '../utils/categories';
+import { handlePrecoChange, precoToNumber } from '../services/precoService';
 
 interface CreateProductModalProps {
     open: boolean;
@@ -32,26 +33,6 @@ export default function CreateProductModal({ open, onClose, onProductCreated }: 
             );
         }
     }, [categoria]);
-
-    const handlePrecoChange = (value: string) => {
-        let v = value.replace(/[^0-9,]/g, '');
-
-        const parts = v.split(',');
-        if (parts.length > 2) {
-            v = parts[0] + ',' + parts[1];
-        }
-
-        if (parts[1]?.length > 2) {
-            v = parts[0] + ',' + parts[1].slice(0, 2);
-        }
-
-        setPreco(v);
-    };
-
-    const precoToNumber = (str: string) => {
-        if (!str) return 0;
-        return parseFloat(str.replace(',', '.') || '0');
-    };
 
     const validate = () => {
         const newErrors: { [key: string]: string } = {};
@@ -138,7 +119,7 @@ export default function CreateProductModal({ open, onClose, onProductCreated }: 
                                         type="text"
                                         placeholder="Preço * (ex: 12,34)"
                                         value={preco}
-                                        onChange={(e) => handlePrecoChange(e.target.value)}
+                                        onChange={(e) => handlePrecoChange(e.target.value, setPreco)}
                                         className={`w-full border rounded px-3 py-2 ${errors.preco ? 'border-red-500' : 'border-gray-300'
                                             }`}
                                     />
