@@ -118,11 +118,10 @@ export default function CreateProductModal({ open, onClose, onProductCreated }: 
                                 <div>
                                     <input
                                         type="text"
-                                        placeholder="Preço * (ex: 12,34)"
+                                        placeholder="Preço * (ex: 1.234,56)"
                                         value={preco}
                                         onChange={(e) => handlePrecoChange(e.target.value, setPreco)}
-                                        className={`w-full border rounded px-3 py-2 ${errors.preco ? 'border-red-500' : 'border-gray-300'
-                                            }`}
+                                        className={`w-full border rounded px-3 py-2 ${errors.preco ? 'border-red-500' : 'border-gray-300'}`}
                                     />
                                     {errors.preco && (
                                         <p className="text-sm text-red-600 mt-1">{errors.preco}</p>

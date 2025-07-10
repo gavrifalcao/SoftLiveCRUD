@@ -84,15 +84,28 @@ export default function EditProductModal({ open, onClose, product, onProductUpda
 
                 {/* Nome */}
                 <div>
-                  <input type="text" placeholder="Nome *" value={nome} onChange={(e) => setNome(e.target.value)}
-                    className={`w-full border rounded px-3 py-2 ${errors.nome ? 'border-red-500' : 'border-gray-300'}`} />
-                  {errors.nome && <p className="text-sm text-red-600 mt-1">{errors.nome}</p>}
+                  <input
+                    type="text"
+                    placeholder="Nome *"
+                    value={nome}
+                    onChange={(e) => setNome(e.target.value)}
+                    className={`w-full border rounded px-3 py-2 ${errors.nome ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                  />
+                  {errors.nome && (
+                    <p className="text-sm text-red-600 mt-1">{errors.nome}</p>
+                  )}
                 </div>
 
                 {/* Descrição */}
                 <div>
-                  <textarea placeholder="Descrição" value={descricao} onChange={(e) => setDescricao(e.target.value)} maxLength={70}
-                    className="w-full border rounded px-3 py-2 border-gray-300" />
+                  <textarea
+                    placeholder="Descrição"
+                    value={descricao}
+                    onChange={(e) => setDescricao(e.target.value)}
+                    maxLength={70}
+                    className="w-full border rounded px-3 py-2 border-gray-300"
+                  />
                   <p className="text-right text-sm text-gray-500 mt-1">{descricao.length}/70</p>
                 </div>
 
@@ -100,31 +113,48 @@ export default function EditProductModal({ open, onClose, product, onProductUpda
                 <div>
                   <input
                     type="text"
-                    placeholder="Preço * (ex: 12,34)"
+                    placeholder="Preço * (ex: 1.234,56)"
                     value={preco}
                     onChange={(e) => handlePrecoChange(e.target.value, setPreco)}
-                    className={`w-full border rounded px-3 py-2 ${errors.preco ? 'border-red-500' : 'border-gray-300'}`} />
-                  {errors.preco && <p className="text-sm text-red-600 mt-1">{errors.preco}</p>}
+                    className={`w-full border rounded px-3 py-2 ${errors.preco ? 'border-red-500' : 'border-gray-300'}`}
+                  />
+                  {errors.preco && (
+                    <p className="text-sm text-red-600 mt-1">{errors.preco}</p>
+                  )}
                 </div>
 
                 {/* Categoria */}
                 <div className="relative" ref={inputCategoriaRef}>
-                  <input type="text" placeholder="Categoria *" value={categoria}
-                    onChange={(e) => { setCategoria(e.target.value); setShowDropdown(true); }}
+                  <input
+                    type="text"
+                    placeholder="Categoria *"
+                    value={categoria}
+                    onChange={(e) => {
+                      setCategoria(e.target.value);
+                      setShowDropdown(true);
+                    }}
                     onFocus={() => setShowDropdown(true)}
                     onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
-                    className={`w-full border rounded px-3 py-2 ${errors.categoria ? 'border-red-500' : 'border-gray-300'}`} />
+                    className={`w-full border rounded px-3 py-2 ${errors.categoria ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                    autoComplete="off"
+                  />
                   {showDropdown && filteredCategories.length > 0 && (
                     <ul className="absolute z-20 max-h-40 w-full overflow-auto rounded border border-gray-300 bg-white shadow-md">
                       {filteredCategories.map((cat) => (
-                        <li key={cat} onClick={() => handleSelectCategoria(cat)}
-                          className="cursor-pointer px-3 py-2 hover:bg-gray-200">
+                        <li
+                          key={cat}
+                          onClick={() => handleSelectCategoria(cat)}
+                          className="cursor-pointer px-3 py-2 hover:bg-gray-200"
+                        >
                           {cat}
                         </li>
                       ))}
                     </ul>
                   )}
-                  {errors.categoria && <p className="text-sm text-red-600 mt-1">{errors.categoria}</p>}
+                  {errors.categoria && (
+                    <p className="text-sm text-red-600 mt-1">{errors.categoria}</p>
+                  )}
                 </div>
               </div>
 

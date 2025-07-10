@@ -3,6 +3,7 @@ import type { Product } from '../types/Product';
 import productIcon from '../assets/img/product.svg';
 import tardisImg from '../assets/img/tardis.jpg';
 import stargateImg from '../assets/img/stargate.jpg';
+import rociImg from '../assets/img/roci.jpg';
 import DeleteProductModal from './deleteProductModal';
 import EditProductModal from './editProductModal';
 import { deleteProduct } from '../services/productService';
@@ -32,6 +33,7 @@ export function ProductCard({ product, onDelete, onUpdate }: ProductCardProps) {
         const nome = product.nome.toLowerCase();
         if (nome === 'tardis') return tardisImg;
         if (nome === 'stargate') return stargateImg;
+        if (nome === 'rocinante') return rociImg;
         return productIcon;
     };
 
