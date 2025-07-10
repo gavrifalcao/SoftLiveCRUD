@@ -21,7 +21,7 @@ export default function App() {
         onClose={() => setModalCreateOpen(false)}
         onProductCreated={(newProd) => setProducts((prev) => [...prev, newProd])}
       />
-      <div class="fixed top-0 left-0 w-full h-[6rem] bg-white shadow-md z-50 flex items-center px-6">
+      <div className="fixed top-0 left-0 w-full h-[6rem] bg-white shadow-md z-50 flex items-center px-6">
         <h1 className="text-2xl font-bold">Lista de Produtos</h1>
         <button onClick={() => setModalCreateOpen(true)} className="ml-auto bg-[#28A745] hover:bg-[#218838] text-white font-semibold px-4 py-2 rounded transition-colors">
           Adicionar Produto

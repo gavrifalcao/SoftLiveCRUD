@@ -84,6 +84,7 @@ export default function CreateProductModal({ open, onClose, onProductCreated }: 
                             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 space-y-4">
                                 <DialogTitle as="h3" className="text-lg font-semibold text-gray-900">
                                     Adicionar Produto
+                                    <p className="text-left text-sm text-gray-500 mt-1">Preencha os campos abaixo para editar o produto. Os campos marcados com asterisco * são de preenchimento obrigatório.</p>
                                 </DialogTitle>
 
                                 {/* Nome */}
