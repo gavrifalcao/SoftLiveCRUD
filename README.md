@@ -18,13 +18,8 @@ Aplicação web desenvolvida como parte de um teste técnico para vaga de Front-
 ## 🔗 Link para acesso
 
 ➡️ Acesse o projeto publicado:  
-**[https://softlive-crud.vercel.app](https://soft-live-crud.vercel.app)**
+**[https://softlive-crud.vercel.app](https://softlive-crud.vercel.app)**
 
----
-
-## 📷 Captura de tela
-
-![Screenshot da aplicação](./src/assets/img/crud-home.png)
 
 ---
 
