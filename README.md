@@ -70,8 +70,6 @@ Acesse no navegador: [http://localhost:5173](http://localhost:5173)
 - Vite
 - TypeScript
 - Tailwind CSS
-- Headless UI
-- HeroIcons
 - Axios
 - MockAPI.io
 
