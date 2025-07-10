@@ -41,7 +41,7 @@ export function ProductCard({ product, onDelete, onUpdate }: ProductCardProps) {
 
     return (
         <>
-            <div className="flex flex-col gap-2 p-1 px-3 rounded-lg border border-gray-200 bg-white shadow-md hover:shadow-lg w-[15rem] h-[27rem]">
+            <div className="flex flex-col gap-2 p-1 px-3 rounded-lg border border-gray-200 bg-white shadow-md hover:shadow-lg w-[15rem] h-[28.25rem]">
                 <div className="relative w-[13rem] h-[13rem] rounded-[1rem] m-[0.5rem] mx-auto block">
                     <img src={getProductImage()} alt={`Imagem de ${product.nome}`} className="w-full h-full object-cover rounded-[1rem]" />
                     <p className="absolute bottom-2 right-2 font-semibold bg-white/25 text-black-700 px-1 py-0 rounded">

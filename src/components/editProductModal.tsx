@@ -89,9 +89,11 @@ export default function EditProductModal({ open, onClose, product, onProductUpda
                     placeholder="Nome *"
                     value={nome}
                     onChange={(e) => setNome(e.target.value)}
+                    maxLength={26}
                     className={`w-full border rounded px-3 py-2 ${errors.nome ? 'border-red-500' : 'border-gray-300'
                       }`}
                   />
+                  <p className="text-right text-sm text-gray-500 mt-1">{nome.length}/26</p>
                   {errors.nome && (
                     <p className="text-sm text-red-600 mt-1">{errors.nome}</p>
                   )}
