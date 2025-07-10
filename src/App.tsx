@@ -1,4 +1,3 @@
-// src/App.tsx
 import { useEffect, useState } from 'react';
 import { getProducts } from './services/productService';
 import type { Product } from './types/Product';
@@ -24,7 +23,13 @@ export default function App() {
 
       <div className="flex flex-wrap gap-8 bg-gray-50 min-h-screen p-[1.5rem] pt-[7.5rem] mx-auto justify-center">
         {products.map((p) => (
-          <ProductCard key={p.id} product={p} />
+          <ProductCard
+            key={p.id}
+            product={p}
+            onDelete={(id) => {
+              setProducts((prev) => prev.filter((prod) => prod.id !== id));
+            }}
+          />
         ))}
       </div>
     </div>
