@@ -4,6 +4,8 @@ import productIcon from '../assets/img/product.svg';
 import tardisImg from '../assets/img/tardis.jpg';
 import stargateImg from '../assets/img/stargate.jpg';
 import rociImg from '../assets/img/roci.jpg';
+import deleteBtn from '../assets/img/delete-btn.svg';
+import editBtn from '../assets/img/edit-btn.svg';
 import DeleteProductModal from './deleteProductModal';
 import EditProductModal from './editProductModal';
 import { deleteProduct } from '../services/productService';
@@ -65,7 +67,7 @@ export function ProductCard({ product, onDelete, onUpdate }: ProductCardProps) {
                             onClick={() => setModalEditOpen(true)}
                             className="w-10 h-10 rounded-full bg-[#FDBE10] flex items-center justify-center hover:bg-[#E6B800]"
                         >
-                            <img src="src/assets/img/edit-btn.svg" alt="Editar" className="w-6 h-6" />
+                            <img src={editBtn} alt="Editar" className="w-6 h-6" />
                         </button>
 
                         <button
@@ -73,7 +75,7 @@ export function ProductCard({ product, onDelete, onUpdate }: ProductCardProps) {
                             className="w-10 h-10 rounded-full bg-[#E60000] flex items-center justify-center hover:bg-[#C70000]"
                             aria-label="Deletar"
                         >
-                            <img src="src/assets/img/delete-btn.svg" alt="Deletar" className="w-6 h-6" />
+                            <img src={deleteBtn} alt="Deletar" className="w-6 h-6" />
                         </button>
                     </div>
                 </div>
