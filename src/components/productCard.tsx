@@ -1,4 +1,3 @@
-// src/components/ProductCard.tsx
 import type { Product } from '../types/Product';
 import productIcon from '../assets/img/product.svg';
 

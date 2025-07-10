@@ -1,0 +1,23 @@
+src/
+├── assets/
+ ├── img/
+  ├── crud-home.svg
+  ├── delete-btn.svg
+  ├── edit-btn.svg
+  └── product.svg
+ └── react.svg
+├── components/
+ └── productCard.tsx
+├── hooks/
+├── pages/
+├── services/
+ ├── api.ts
+ └── productService.ts
+├── types/
+ └── Product.ts
+├── utils/
+├── App.css
+├── App.tsx
+├── index.css
+├── main.tsx
+└── vite-env.d.ts
