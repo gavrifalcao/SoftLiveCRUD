@@ -1,47 +1,62 @@
-import { useEffect, useState } from 'react';
-import { getProducts } from './services/productService';
+import { useState } from 'react';
 import type { Product } from './types/Product';
-import { ProductCard } from './components/productCard';
-import CreateProductModal from './components/createProductModal';
+import ProductPage from './pages/ProductPage';
+import homeImage from './assets/img/crud-home.svg';
 
 export default function App() {
-  const [products, setProducts] = useState<Product[]>([]);
   const [modalCreateOpen, setModalCreateOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState<'home' | 'produtos'>('home');
 
-  useEffect(() => {
-    getProducts()
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.error(err));
-  }, []);
+  const handleOpenCreateModal = () => setModalCreateOpen(true);
+  const handleProductCreated = (_: Product) => setModalCreateOpen(false);
 
   return (
     <div>
-      <CreateProductModal
-        open={modalCreateOpen}
-        onClose={() => setModalCreateOpen(false)}
-        onProductCreated={(newProd) => setProducts((prev) => [...prev, newProd])}
-      />
-      <div className="fixed top-0 left-0 w-full h-[6rem] bg-white shadow-md z-50 flex items-center px-6">
-        <h1 className="text-2xl font-bold">Lista de Produtos</h1>
-        <button onClick={() => setModalCreateOpen(true)} className="ml-auto bg-[#28A745] hover:bg-[#218838] text-white font-semibold px-4 py-2 rounded transition-colors">
-          Adicionar Produto
-        </button>
+      {/* Menu superior fixo */}
+      <div className="fixed top-0 left-0 w-full h-[6rem] bg-white shadow-md z-50 flex items-center justify-between px-6">
+        <h1 className="text-2xl font-bold w-1/2">SoftLive CRUD</h1>
+
+        <div className="w-1/2 flex justify-end items-center gap-6">
+          <div
+            className={`text-lg font-medium cursor-pointer ${currentPage === 'home' ? 'underline' : ''
+              }`}
+            onClick={() => setCurrentPage('home')}
+          >
+            Home
+          </div>
+          <div
+            className={`text-lg font-medium cursor-pointer ${currentPage === 'produtos' ? 'underline' : ''
+              }`}
+            onClick={() => setCurrentPage('produtos')}
+          >
+            Produtos
+          </div>
+          <div className="text-lg font-medium cursor-pointer">Sobre</div>
+          <div className="text-lg font-medium cursor-pointer">Contato</div>
+
+          <button
+            onClick={handleOpenCreateModal}
+            className={`bg-[#28A745] hover:bg-[#218838] text-white font-semibold px-4 py-2 rounded transition-colors ${currentPage === 'produtos' ? 'visible' : 'invisible'
+              }`}
+          >
+            Adicionar Produto
+          </button>
+
+        </div>
       </div>
 
-      <div className="flex flex-wrap gap-8 bg-gray-50 min-h-screen p-[1.5rem] pt-[7.5rem] mx-auto justify-center">
-        {products.map((p) => (
-          <ProductCard
-            key={p.id}
-            product={p}
-            onDelete={(id) => setProducts((prev) => prev.filter((x) => x.id !== id))}
-            onUpdate={(updated) =>
-              setProducts((prev) =>
-                prev.map((p) => (p.id === updated.id ? updated : p))
-              )
-            }
-          />
-        ))}
-      </div>
+      {/* Conteúdo da página */}
+      {currentPage === 'home' ? (
+        <div className="flex items-center justify-center min-h-screen bg-gray-50 pt-[6rem]">
+          <img src={homeImage} alt="CRUD Home" className="max-w-[600px] w-full" />
+        </div>
+      ) : (
+        <ProductPage
+          isModalOpen={modalCreateOpen}
+          onOpenCreateModal={() => setModalCreateOpen(false)}
+          onProductCreated={handleProductCreated}
+        />
+      )}
     </div>
   );
 }
