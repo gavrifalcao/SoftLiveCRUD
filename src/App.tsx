@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Product } from './types/Product';
-import ProductPage from './pages/ProductPage';
+import ProductPage from './pages/productPage';
 import homeImage from './assets/img/crud-home.svg';
 
 export default function App() {
@@ -12,7 +12,6 @@ export default function App() {
 
   return (
     <div>
-      {/* Menu superior fixo */}
       <div className="fixed top-0 left-0 w-full h-[6rem] bg-white shadow-md z-50 flex items-center justify-between px-6">
         <h1 className="text-2xl font-bold w-1/2">SoftLive CRUD</h1>
 
@@ -45,7 +44,6 @@ export default function App() {
         </div>
       </div>
 
-      {/* Conteúdo da página */}
       {currentPage === 'home' ? (
         <div className="flex items-center justify-center min-h-screen bg-gray-50 pt-[6rem]">
           <img src={homeImage} alt="CRUD Home" className="max-w-[600px] w-full" />

@@ -88,6 +88,6 @@ src/
 
 ## 📃 Licença
 
-Este projeto foi desenvolvido unicamente para fins de avaliação técnica e aprendizado. Nenhum uso comercial é autorizado sem consentimento prévio.
+Este projeto foi desenvolvido para fins de avaliação técnica e aprendizado.
 
 ---
