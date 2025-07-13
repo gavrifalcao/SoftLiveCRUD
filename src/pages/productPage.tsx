@@ -9,8 +9,7 @@ import {
   fetchByName,
   fetchByCategory,
   filterByPrice,
-  filterByPriceRange,
-  clearFilters
+  filterByPriceRange
 } from '../services/filtroService';
 
 export default function ProductPage() {
