@@ -5,12 +5,7 @@ import { ProductCard } from '../components/productCard';
 import CreateProductModal from '../components/createProductModal';
 import { SlOptionsVertical } from 'react-icons/sl';
 import { CATEGORIES } from '../utils/categories';
-import {
-  fetchByName,
-  fetchByCategory,
-  filterByPrice,
-  filterByPriceRange
-} from '../services/filtroService';
+import { fetchByName, fetchByCategory, filterByPrice, filterByPriceRange} from '../services/filtroService';
 
 export default function ProductPage() {
   const [products, setProducts] = useState<Product[]>([]);
