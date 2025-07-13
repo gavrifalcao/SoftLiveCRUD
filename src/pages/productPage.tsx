@@ -3,20 +3,40 @@ import { getProducts } from '../services/productService';
 import type { Product } from '../types/Product';
 import { ProductCard } from '../components/productCard';
 import CreateProductModal from '../components/createProductModal';
+import { SlOptionsVertical } from 'react-icons/sl';
+import { CATEGORIES } from '../utils/categories';
+import { useRef } from 'react';
 
 export default function ProductPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [modalCreateOpen, setModalCreateOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchType, setSearchType] = useState<'nome' | 'categoria' | 'atePreco' | 'intervaloPreco'>('nome');
   const [searchValue, setSearchValue] = useState('');
   const [searchRange, setSearchRange] = useState({ min: '', max: '' });
-
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [filteredCategories, setFilteredCategories] = useState<string[]>([]);
+  const inputCategoriaRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     getProducts()
       .then((res) => setProducts(res.data))
       .catch((err) => console.error(err));
   }, []);
+
+  useEffect(() => {
+    if (searchType === 'categoria') {
+      if (searchValue.trim() === '') {
+        setFilteredCategories(CATEGORIES);
+      } else {
+        setFilteredCategories(
+          CATEGORIES.filter((cat) =>
+            cat.toLowerCase().includes(searchValue.trim().toLowerCase())
+          )
+        );
+      }
+    }
+  }, [searchValue, searchType]);
 
   return (
     <>
@@ -29,98 +49,134 @@ export default function ProductPage() {
         }}
       />
 
-      {/* <div className="fixed top-[6rem] left-0 w-full h-[3rem] bg-gray-100 z-40 flex items-center justify-between px-12 shadow-sm">
-        <div className='w-full flex items-center gap-4'>
-          <select
-            className="border rounded px-3 py-2"
-            value={searchType}
-            onChange={(e) => setSearchType(e.target.value)}
-          >
-            <option value="nome">Buscar por nome</option>
-            <option value="categoria">Buscar por categoria</option>
-            <option value="atePreco">Até X preço</option>
-            <option value="intervaloPreco">Entre X e Y preço</option>
-          </select>
-          {searchType === 'nome' && (
-            <input
-              type="text"
-              placeholder="Digite o nome..."
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              maxLength={26}
-              className="w-96 border rounded px-3 py-2"
-            />
-          )}
-          {searchType === 'categoria' && (
+      <button
+        className="lg:hidden fixed top-20 right-4 bg-gray-200 p-2 rounded-full shadow-md z-50"
+        onClick={() => setSidebarOpen((prev) => !prev)}
+      >
+        <SlOptionsVertical />
+      </button>
+
+      <div className={`fixed top-20 left-0 z-40 bg-gray-100 p-4 py-[2rem] w-72 h-[calc(100vh-5rem)] shadow-md transition-transform duration-300 ease-in-out
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
+
+        <button
+          onClick={() => setModalCreateOpen(true)}
+          className="bg-green-600 hover:bg-green-700 text-white font-semibold w-full py-2 rounded mb-4"
+        >
+          Adicionar Produto
+        </button>
+
+        <hr className="my-2 border-gray-400" />
+
+        <h2 className="font-semibold text-gray-700 mb-2">Filtro de busca</h2>
+
+        <select
+          className="w-full border rounded px-2 py-1 mb-2"
+          value={searchType}
+          onChange={(e) => setSearchType(e.target.value as any)}
+        >
+          <option value="nome">Nome</option>
+          <option value="categoria">Categoria</option>
+          <option value="atePreco">Até um preço</option>
+          <option value="intervaloPreco">Entre dois preços</option>
+        </select>
+
+        {searchType === 'nome' && (
+          <input
+            type="text"
+            placeholder="Digite o nome..."
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            className="w-full border rounded px-2 py-1 mb-2"
+          />
+        )}
+        {searchType === 'categoria' && (
+          <div className="relative mb-2" ref={inputCategoriaRef}>
             <input
               type="text"
               placeholder="Digite a categoria..."
               value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              className="w-96 border rounded px-3 py-2"
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+                setShowDropdown(true);
+              }}
+              onFocus={() => setShowDropdown(true)}
+              onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
+              className="w-full border rounded px-2 py-1"
+              autoComplete="off"
             />
-          )}
-          {searchType === 'atePreco' && (
+            {showDropdown && filteredCategories.length > 0 && (
+              <ul className="absolute z-20 max-h-40 w-full overflow-auto rounded border border-gray-300 bg-white shadow-md">
+                {filteredCategories.map((cat) => (
+                  <li
+                    key={cat}
+                    onClick={() => {
+                      setSearchValue(cat);
+                      setShowDropdown(false);
+                    }}
+                    className="cursor-pointer px-3 py-2 hover:bg-gray-200"
+                  >
+                    {cat}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+        {searchType === 'atePreco' && (
+          <input
+            type="number"
+            placeholder="Até R$..."
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            className="w-full border rounded px-2 py-1 mb-2"
+          />
+        )}
+        {searchType === 'intervaloPreco' && (
+          <div className="flex gap-2 mb-2">
             <input
               type="number"
-              placeholder="Até R$..."
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              className="w-48 border rounded px-3 py-2"
+              placeholder="De R$"
+              value={searchRange.min}
+              onChange={(e) =>
+                setSearchRange({ ...searchRange, min: e.target.value })
+              }
+              className="w-1/2 border rounded px-2 py-1"
             />
-          )}
-          {searchType === 'intervaloPreco' && (
-            <>
-              <input
-                type="number"
-                placeholder="De R$"
-                value={searchRange.min}
-                onChange={(e) =>
-                  setSearchRange({ ...searchRange, min: e.target.value })
-                }
-                className="w-32 border rounded px-3 py-2"
-              />
-              <span className="text-gray-600">a</span>
-              <input
-                type="number"
-                placeholder="Até R$"
-                value={searchRange.max}
-                onChange={(e) =>
-                  setSearchRange({ ...searchRange, max: e.target.value })
-                }
-                className="w-32 border rounded px-3 py-2"
-              />
-            </>
-          )}
+            <input
+              type="number"
+              placeholder="Até R$"
+              value={searchRange.max}
+              onChange={(e) =>
+                setSearchRange({ ...searchRange, max: e.target.value })
+              }
+              className="w-1/2 border rounded px-2 py-1"
+            />
+          </div>
+        )}
+
+        <button className="bg-blue-500 hover:bg-blue-600 text-white w-full py-2 rounded">
+          Filtrar buscas
+        </button>
+      </div>
+
+      <div className="lg:ml-72 p-6 pt-[8rem] bg-gray-50 min-h-screen">
+        <div className="flex flex-wrap gap-6 justify-center">
+          {products.map((p) => (
+            <ProductCard
+              key={p.id}
+              product={p}
+              onDelete={(id) =>
+                setProducts((prev) => prev.filter((x) => x.id !== id))
+              }
+              onUpdate={(updated) =>
+                setProducts((prev) =>
+                  prev.map((p) => (p.id === updated.id ? updated : p))
+                )
+              }
+            />
+          ))}
         </div>
-
-        <button
-          onClick={() => setModalCreateOpen(true)}
-          className="bg-[#28A745] hover:bg-[#218838] text-white font-semibold px-4 py-1.5 rounded transition-colors"
-        >
-          Adicionar Produto
-        </button>
-      </div> */}
-
-      <div className="flex flex-wrap gap-8 bg-gray-50 min-h-screen p-[1.5rem] pt-[9.5rem] mx-auto justify-center">
-        <button
-          onClick={() => setModalCreateOpen(true)}
-          className="bg-[#28A745] hover:bg-[#218838] text-white font-semibold px-4 py-1.5 rounded transition-colors h-[3rem]"
-        >
-          Adicionar Produto
-        </button>
-        {products.map((p) => (
-          <ProductCard
-            key={p.id}
-            product={p}
-            onDelete={(id) => setProducts((prev) => prev.filter((x) => x.id !== id))}
-            onUpdate={(updated) =>
-              setProducts((prev) =>
-                prev.map((p) => (p.id === updated.id ? updated : p))
-              )
-            }
-          />
-        ))}
       </div>
     </>
   );
