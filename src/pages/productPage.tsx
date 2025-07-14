@@ -15,9 +15,6 @@ export default function ProductPage() {
   const [searchType, setSearchType] = useState<'nome' | 'categoria' | 'atePreco' | 'intervaloPreco'>('nome');
   const [searchValue, setSearchValue] = useState('');
   const [searchRange, setSearchRange] = useState({ min: '', max: '' });
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [filteredCategories, setFilteredCategories] = useState<string[]>([]);
-  const inputCategoriaRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     getProducts()
@@ -27,20 +24,6 @@ export default function ProductPage() {
       })
       .catch((err) => console.error(err));
   }, []);
-
-  useEffect(() => {
-    if (searchType === 'categoria') {
-      if (searchValue.trim() === '') {
-        setFilteredCategories(CATEGORIES);
-      } else {
-        setFilteredCategories(
-          CATEGORIES.filter((cat) =>
-            cat.toLowerCase().includes(searchValue.trim().toLowerCase())
-          )
-        );
-      }
-    }
-  }, [searchValue, searchType]);
 
   const handleClear = () => {
     setSearchValue('');
