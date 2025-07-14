@@ -57,7 +57,7 @@ export default function ProductPage() {
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}
       >
         <button
-          onClick={() => setModalCreateOpen(true)}
+          onClick={() => { setModalCreateOpen(true); setSidebarOpen(false); }}
           className="bg-green-600 hover:bg-green-700 text-white font-semibold w-full py-2 rounded mb-4"
         >
           Adicionar Produto
