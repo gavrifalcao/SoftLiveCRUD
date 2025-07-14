@@ -33,6 +33,14 @@ export default function ProductPage() {
     setSidebarOpen(false);
   };
 
+  const notFoundProduct: Product = {
+    id: '404',
+    nome: 'Ooops',
+    descricao: 'Nenhum produto encontrado para este filtro',
+    preco: 404,
+    categoria: 'Produtos 404',
+  };
+
   return (
     <>
       <CreateProductModal
@@ -185,24 +193,33 @@ export default function ProductPage() {
 
       <div className="lg:ml-72 p-6 pt-[8rem] bg-gray-50 min-h-screen">
         <div className="flex flex-wrap gap-6 justify-center">
-          {filteredProducts.map((p) => (
+          {filteredProducts.length === 0 ? (
             <ProductCard
-              key={p.id}
-              product={p}
-              onDelete={(id) => {
-                setProducts((prev) => prev.filter((x) => x.id !== id));
-                setFilteredProducts((prev) => prev.filter((x) => x.id !== id));
-              }}
-              onUpdate={(updated) => {
-                setProducts((prev) =>
-                  prev.map((p) => (p.id === updated.id ? updated : p))
-                );
-                setFilteredProducts((prev) =>
-                  prev.map((p) => (p.id === updated.id ? updated : p))
-                );
-              }}
+              product={notFoundProduct}
+              onDelete={() => { }} // sem ação
+              onUpdate={() => { }} // sem ação
             />
-          ))}
+          ) : (
+            filteredProducts.map((p) => (
+              <ProductCard
+                key={p.id}
+                product={p}
+                onDelete={(id) => {
+                  setProducts((prev) => prev.filter((x) => x.id !== id));
+                  setFilteredProducts((prev) => prev.filter((x) => x.id !== id));
+                }}
+                onUpdate={(updated) => {
+                  setProducts((prev) =>
+                    prev.map((p) => (p.id === updated.id ? updated : p))
+                  );
+                  setFilteredProducts((prev) =>
+                    prev.map((p) => (p.id === updated.id ? updated : p))
+                  );
+                }}
+              />
+            ))
+          )}
+
         </div>
       </div>
     </>

@@ -6,6 +6,7 @@ import stargateImg from '../assets/img/stargate.jpg';
 import rociImg from '../assets/img/roci.jpg';
 import deleteBtn from '../assets/img/delete-btn.svg';
 import editBtn from '../assets/img/edit-btn.svg';
+import product404Img from '../assets/img/product404.svg';
 import DeleteProductModal from './deleteProductModal';
 import EditProductModal from './editProductModal';
 import { deleteProduct } from '../services/productService';
@@ -36,6 +37,7 @@ export function ProductCard({ product, onDelete, onUpdate }: ProductCardProps) {
         if (nome === 'tardis') return tardisImg;
         if (nome === 'stargate') return stargateImg;
         if (nome === 'rocinante') return rociImg;
+        if (nome === 'ooops') return product404Img;
         return productIcon;
     };
 
@@ -62,22 +64,24 @@ export function ProductCard({ product, onDelete, onUpdate }: ProductCardProps) {
                         </p>
                     </div>
 
-                    <div className="mt-auto flex flex-row justify-between items-center pt-2">
-                        <button
-                            onClick={() => setModalEditOpen(true)}
-                            className="w-10 h-10 rounded-full bg-[#FDBE10] flex items-center justify-center hover:bg-[#E6B800]"
-                        >
-                            <img src={editBtn} alt="Editar" className="w-6 h-6" />
-                        </button>
+                    {product.id !== '404' && (
+                        <div className="mt-auto flex flex-row justify-between items-center pt-2">
+                            <button
+                                onClick={() => setModalEditOpen(true)}
+                                className="w-10 h-10 rounded-full bg-[#FDBE10] flex items-center justify-center hover:bg-[#E6B800]"
+                            >
+                                <img src={editBtn} alt="Editar" className="w-6 h-6" />
+                            </button>
+                            <button
+                                onClick={() => setModalDeleteOpen(true)}
+                                className="w-10 h-10 rounded-full bg-[#E60000] flex items-center justify-center hover:bg-[#C70000]"
+                                aria-label="Deletar"
+                            >
+                                <img src={deleteBtn} alt="Deletar" className="w-6 h-6" />
+                            </button>
+                        </div>
+                    )}
 
-                        <button
-                            onClick={() => setModalDeleteOpen(true)}
-                            className="w-10 h-10 rounded-full bg-[#E60000] flex items-center justify-center hover:bg-[#C70000]"
-                            aria-label="Deletar"
-                        >
-                            <img src={deleteBtn} alt="Deletar" className="w-6 h-6" />
-                        </button>
-                    </div>
                 </div>
             </div>
 
