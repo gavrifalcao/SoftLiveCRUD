@@ -21,7 +21,7 @@ Aplicação web desenvolvida como parte de um teste técnico para vaga de Front-
 ➡️ Acesse o projeto publicado:  
 **[https://softlive-crud.vercel.app](https://softlive-crud.vercel.app)**
 
-Acesse o endpoint de consulta do **[MockAPI](https://686e751fc9090c495389bc76.mockapi.io/crud/softlive/recursos)**.
+Acesse o endpoint de consulta do **MockAPI** [clicando aqui](https://686e751fc9090c495389bc76.mockapi.io/crud/softlive/recursos).
 
 
 ---
@@ -80,9 +80,9 @@ src/
 ├── assets/
 │   └── img/           → Imagens dos produtos
 ├── components/        → Modais, cards e UI reutilizável
-├── hooks/             → Hooks customizados (futuro)
-├── pages/             → Páginas principais (futuro)
-├── services/          → Comunicação com a API
+├── hooks/             → Hooks customizados (hipotético)
+├── pages/             → Páginas principais
+├── services/          → Comunicação com a API, funcionalidades repetidas
 ├── types/             → Tipagens TypeScript (ex: Produto)
 ├── utils/             → Categorias e funções auxiliares
 ```
