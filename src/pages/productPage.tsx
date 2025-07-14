@@ -5,7 +5,7 @@ import { ProductCard } from '../components/productCard';
 import CreateProductModal from '../components/createProductModal';
 import { SlOptionsVertical } from 'react-icons/sl';
 import { CATEGORIES } from '../utils/categories';
-import { fetchByName, fetchByCategory, filterByPrice, filterByPriceRange} from '../services/filtroService';
+import { fetchByName, fetchByCategory, filterByPrice, filterByPriceRange } from '../services/filtroService';
 
 export default function ProductPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -87,7 +87,11 @@ export default function ProductPage() {
         <select
           className="w-full border rounded px-2 py-1 mb-2"
           value={searchType}
-          onChange={(e) => setSearchType(e.target.value as any)}
+          onChange={(e) => {
+            setSearchType(e.target.value as any);
+            setSearchValue('');
+            setSearchRange({ min: '', max: '' });
+          }}
         >
           <option value="nome">Nome</option>
           <option value="categoria">Categoria</option>
@@ -106,38 +110,20 @@ export default function ProductPage() {
         )}
 
         {searchType === 'categoria' && (
-          <div className="relative mb-2" ref={inputCategoriaRef}>
-            <input
-              type="text"
-              placeholder="Digite a categoria..."
-              value={searchValue}
-              onChange={(e) => {
-                setSearchValue(e.target.value);
-                setShowDropdown(true);
-              }}
-              onFocus={() => setShowDropdown(true)}
-              onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
-              className="w-full border rounded px-2 py-1"
-              autoComplete="off"
-            />
-            {showDropdown && filteredCategories.length > 0 && (
-              <ul className="absolute z-20 max-h-40 w-full overflow-auto rounded border border-gray-300 bg-white shadow-md">
-                {filteredCategories.map((cat) => (
-                  <li
-                    key={cat}
-                    onClick={() => {
-                      setSearchValue(cat);
-                      setShowDropdown(false);
-                    }}
-                    className="cursor-pointer px-3 py-2 hover:bg-gray-200"
-                  >
-                    {cat}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+          <select
+            className="w-full border rounded px-2 py-1 mb-2"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          >
+            <option value="">Selecione uma categoria</option>
+            {CATEGORIES.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
         )}
+
 
         {searchType === 'atePreco' && (
           <input
