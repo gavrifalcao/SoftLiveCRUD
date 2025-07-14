@@ -1,6 +1,6 @@
 # CRUD SoftLive
 
-Aplicação web desenvolvida como parte de um teste técnico para vaga de Front-End. O objetivo foi construir uma interface de CRUD (Criar, Listar, Editar, Deletar) de produtos utilizando as tecnologias React 19, Vite e TypeScript, com boas práticas de organização, validação de formulários e deploy em produção.
+Aplicação web desenvolvida como parte de um teste técnico para vaga de Front-End. O objetivo foi construir uma interface de CRUD (Criar, Listar, Editar, Deletar) de produtos utilizando as tecnologias React 19, Vite, TypeScript e TailwindCSS, com validação de formulários e deploy em produção. O projeto faz uso do **[MockAPI](https://mockapi.io/)**.
 
 ---
 
@@ -10,8 +10,9 @@ Aplicação web desenvolvida como parte de um teste técnico para vaga de Front-
 - Modal para **adição de produto**, com validação de campos e autocomplete de categorias
 - Modal para **edição de produto**, com preenchimento automático dos dados existentes
 - Modal de **confirmação de exclusão**
-- Produtos salvos em uma API mock (MockAPI.io)
+- Produtos salvos em uma API mockada (MockAPI.io)
 - Interface responsiva e clara, com uso de Tailwind CSS e Headless UI
+- Versões desktop e mobile
 
 ---
 
@@ -19,6 +20,8 @@ Aplicação web desenvolvida como parte de um teste técnico para vaga de Front-
 
 ➡️ Acesse o projeto publicado:  
 **[https://softlive-crud.vercel.app](https://softlive-crud.vercel.app)**
+
+Acesse o endpoint de consulta do **[MockAPI](https://686e751fc9090c495389bc76.mockapi.io/crud/softlive/recursos)**.
 
 
 ---
